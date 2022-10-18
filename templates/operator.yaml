@@ -1,0 +1,32 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+labels:
+  template: ${BROKER_NAME}
+metadata:
+  annotations:
+    description: deployment for ${BROKER_NAME}
+  name: ${BROKER_NAME}
+objects:
+
+- apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhsso-subscription
+  namespace: rh-sso
+spec:
+  installPlanApproval: Automatic
+  name: rhsso-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  config:
+      env:
+        - name: RELATED_IMAGE_RHSSO_OPENJDK
+          value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rh-sso-7/sso76-openshift-rhel8:7.6-6'
+        - name: RELATED_IMAGE_RHSSO_OPENJ9
+          value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rh-sso-7/sso76-openshift-rhel8:7.6-6'
+        - name: RELATED_IMAGE_KEYCLOAK_INIT_CONTAINER
+          value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rh-sso-7/sso7-rhel8-init-container:7.6-6'
+        - name: RELATED_IMAGE_RHSSO_INIT_CONTAINER
+          value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rh-sso-7/sso7-rhel8-init-container:7.6-6'
+        - name: RELATED_IMAGE_POSTGRESQL
+          value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rhscl/postgresql-10-rhel7:1'
