@@ -20,3 +20,4 @@ spec:
           value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rh-sso-7/sso7-rhel8-init-container:7.6-6'
         - name: RELATED_IMAGE_POSTGRESQL
           value: 'lmregistry.us.lmco.com/lmc.eo.mdw.openshift/rhscl/postgresql-10-rhel7:1'
+          
